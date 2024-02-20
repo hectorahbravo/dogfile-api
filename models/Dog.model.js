@@ -39,5 +39,5 @@ const dogSchema = mongoose.Schema(
   }
 );
 
-const Dog = mongoose.model("Dog", likeSchema);
+const Dog = mongoose.model("Dog", dogSchema);
 module.exports = Dog;

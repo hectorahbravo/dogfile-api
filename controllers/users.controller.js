@@ -29,7 +29,7 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.getUser = (req, res, next) => {
-  User.findById(id)
+  User.findById(req.params.id)
     .then((user) => {
       res.status(StatusCodes.CREATED).json(user);
     })

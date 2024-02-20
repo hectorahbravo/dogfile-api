@@ -3,7 +3,7 @@ const createError = require("http-errors");
 const Dog = require("../models/Dog.model");
 
 module.exports.create = (req, res, next) => {
-  const userToCreate = {
+  const dogToCreate = {
     ...req.body,
     //avatar: req.file.path,
   };
