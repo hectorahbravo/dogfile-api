@@ -9,5 +9,6 @@ router.get("/users/:id", usersController.getUser);
 
 //Dogs
 router.post("/users/:id/dogs", dogsControllers.create);
+router.get("/users/:id/dogs/:dogId", dogsControllers.getDog);
 
 module.exports = router;
