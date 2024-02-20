@@ -3,12 +3,14 @@ const createError = require("http-errors");
 const Dog = require("../models/Dog.model");
 
 module.exports.create = (req, res, next) => {
+  const id = req.params.id;
   const dogToCreate = {
     ...req.body,
+    owner: id,
     //avatar: req.file.path,
   };
 
-  Dog.findOne({ name: req.body.name })
+  Dog.findOne({ name: req.body.name, owner: id })
     .then((dog) => {
       if (dog) {
         next(createError(StatusCodes.BAD_REQUEST, "name already in use"));

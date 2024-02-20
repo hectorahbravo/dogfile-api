@@ -8,6 +8,6 @@ router.post("/users", upload.single("avatar"), usersController.create);
 router.get("/users/:id", usersController.getUser);
 
 //Dogs
-router.post("/dogs", dogsControllers.create);
+router.post("/users/:id/dogs", dogsControllers.create);
 
 module.exports = router;
