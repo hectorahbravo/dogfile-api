@@ -18,9 +18,27 @@ module.exports.getRecommendation = (req, res, next) => {
   Recommendation.findById(req.params.id)
     .then((recommendation) => {
       if (!recommendation) {
-        return next(createError(StatusCodes.NOT_FOUND, "Recommendation not found"));
+        return next(
+          createError(StatusCodes.NOT_FOUND, "Recommendation not found")
+        );
       }
       res.status(StatusCodes.OK).json(recommendation);
+    })
+    .catch(next);
+};
+
+module.exports.editRecommendation = (req, res, next) => {
+  ToDo.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((editedRecommendation) => {
+      res.status(StatusCodes.OK).json(editedRecommendation);
+    })
+    .catch(next);
+};
+
+module.exports.deleteRecommendation = (req, res, next) => {
+  ToDo.findByIdAndDelete(req.params.id)
+    .then((Recommendation) => {
+      res.status(StatusCodes.OK).json({});
     })
     .catch(next);
 };
