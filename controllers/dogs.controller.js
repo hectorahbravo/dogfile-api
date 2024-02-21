@@ -29,3 +29,23 @@ module.exports.getDog = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.deleteDog = (req, res, next) => {
+  Dog.findByIdAndDelete(req.params.id)
+    .then((dog) => {
+      if (!dog) {
+        next(createError(StatusCodes.NOT_FOUND, 'Dog not found'))
+      } else {
+        res.status(StatusCodes.NO_CONTENT).json();
+      }
+    })
+    .catch(next)
+}
+
+module.exports.editDog = (req, res, next) => {
+  Dog.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(editedDog => {
+      res.json(editedDog);
+    })
+    .catch(next)
+}
