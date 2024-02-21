@@ -27,6 +27,14 @@ router.put('/reports/:id', reportsController.editReport);
 //Recommendations
 router.post("/recommendations", recommendationsController.createRecommendation);
 router.get("/recommendations/:id", recommendationsController.getRecommendation);
+router.put(
+  "/recommendations/:id",
+  recommendationsController.editRecommendation
+);
+router.delete(
+  "/recommendations/:id",
+  recommendationsController.deleteRecommendation
+);
 
 //Likes
 router.post("/reports/:id/like", likeController.toggleLike);
