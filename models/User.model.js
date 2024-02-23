@@ -29,7 +29,6 @@ const userSchema = mongoose.Schema(
     dogs: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Dogs",
-      required: [true, "Required field"],
     },
     avatar: {
       type: String,

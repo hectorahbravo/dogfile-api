@@ -13,6 +13,7 @@ router.post("/login", authController.login);
 
 //User
 router.post("/users", upload.single("avatar"), usersController.create);
+router.get("/users/me", usersController.getCurrentUser);
 router.get("/users/:id", usersController.getUser);
 router.delete("/users/:id", usersController.deleteUser);
 router.put("/users/:id", usersController.editUser);

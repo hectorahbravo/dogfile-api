@@ -5,7 +5,7 @@ const User = require("../models/User.model");
 module.exports.create = (req, res, next) => {
   const userToCreate = {
     ...req.body,
-    //avatar: req.file.path,
+    avatar: req.file.path,
   };
 
   User.findOne({
@@ -36,23 +36,30 @@ module.exports.getUser = (req, res, next) => {
     .catch(next);
 };
 
-
 module.exports.deleteUser = (req, res, next) => {
   User.findByIdAndDelete(req.params.id)
     .then((user) => {
       if (!user) {
-        next(createError(StatusCodes.NOT_FOUND, 'User not found'))
+        next(createError(StatusCodes.NOT_FOUND, "User not found"));
       } else {
         res.status(StatusCodes.NO_CONTENT).json();
       }
     })
-    .catch(next)
-}
+    .catch(next);
+};
 
 module.exports.editUser = (req, res, next) => {
   User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then(editedUser => {
+    .then((editedUser) => {
       res.json(editedUser);
     })
-    .catch(next)
-}
+    .catch(next);
+};
+
+module.exports.getCurrentUser = (req, res, next) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      res.status(StatusCodes.CREATED).json(user);
+    })
+    .catch(next);
+};
