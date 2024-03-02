@@ -57,7 +57,7 @@ module.exports.editUser = (req, res, next) => {
 };
 
 module.exports.getCurrentUser = (req, res, next) => {
-  User.findById(req.params.id)
+  User.findById(req.currentUserId)
     .then((user) => {
       res.status(StatusCodes.CREATED).json(user);
     })

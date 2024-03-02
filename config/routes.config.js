@@ -7,16 +7,32 @@ const recommendationsController = require("../controllers/recommendations.contro
 const likeController = require("../controllers/likes.controller");
 const authController = require("../controllers/auth.controller");
 const remindersController = require("../controllers/reminders.controller");
-
+const authMiddleware = require("../middlewares/auth.middleware");
 //Auth
 router.post("/login", authController.login);
 
 //User
 router.post("/users", upload.single("avatar"), usersController.create);
-router.get("/users/me", usersController.getCurrentUser);
-router.get("/users/:id", usersController.getUser);
-router.delete("/users/:id", usersController.deleteUser);
-router.put("/users/:id", usersController.editUser);
+router.get(
+  "/users/me",
+  authMiddleware.isAuthenticated,
+  usersController.getCurrentUser
+);
+router.get(
+  "/users/:id",
+  authMiddleware.isAuthenticated,
+  usersController.getUser
+);
+router.delete(
+  "/users/:id",
+  authMiddleware.isAuthenticated,
+  usersController.deleteUser
+);
+router.put(
+  "/users/:id",
+  authMiddleware.isAuthenticated,
+  usersController.editUser
+);
 
 //Dogs
 router.post("/users/:id/dogs", dogsControllers.create);
