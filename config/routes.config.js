@@ -19,10 +19,11 @@ router.delete("/users/:id", authMiddleware.isAuthenticated, usersController.dele
 router.put("/users/:id", authMiddleware.isAuthenticated, usersController.editUser);
 
 //Dogs
-router.post("/users/:id/dogs", dogsControllers.create);
-router.get("/users/:id/dogs/:dogId", dogsControllers.getDog);
-router.delete("/users/:id/dogs/:dogId", dogsControllers.deleteDog);
-router.put("/users/:id/dogs/:dogId", dogsControllers.editDog);
+router.post("/users/:userId/dogs", authMiddleware.isAuthenticated, dogsControllers.create);
+router.get("/users/:id/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.getDog);
+router.delete("/users/:id/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.deleteDog);
+router.put("/users/:id/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.editDog);
+router.get('/users/:id/dogs/:dogId', authMiddleware.isAuthenticated, dogsControllers.getUserDogs)
 
 //Reports
 router.post("/reports", reportsController.createReport);

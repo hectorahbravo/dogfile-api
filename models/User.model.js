@@ -26,10 +26,6 @@ const userSchema = mongoose.Schema(
       required: [true, "required field"],
       minlength: [8, "invalid length"],
     },
-    dogs: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "Dogs",
-    },
     avatar: {
       type: String,
       default:
@@ -49,6 +45,13 @@ const userSchema = mongoose.Schema(
   }
 );
 // Crear el metodo para comparar contraseñas
+
+userSchema.virtual('dogs', {
+  ref: 'Dog',
+  foreignField: 'owner',
+  localField: '_id',
+  justOne: false
+})
 
 userSchema.methods.checkPassword = function (passwordToCompare) {
   return bcrypt.compare(passwordToCompare, this.password);

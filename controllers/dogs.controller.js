@@ -3,14 +3,12 @@ const createError = require("http-errors");
 const Dog = require("../models/Dog.model");
 
 module.exports.create = (req, res, next) => {
-  const id = req.params.id;
   const dogToCreate = {
     ...req.body,
-    owner: id,
     //avatar: req.file.path,
   };
 
-  Dog.findOne({ name: req.body.name, owner: id })
+  Dog.findOne({ name: req.body.name, owner: req.body.owner })
     .then((dog) => {
       if (dog) {
         next(createError(StatusCodes.BAD_REQUEST, "name already in use"));
@@ -22,6 +20,8 @@ module.exports.create = (req, res, next) => {
     })
     .catch(next);
 };
+
+
 module.exports.getDog = (req, res, next) => {
   Dog.findById(req.params.dogId)
     .then((dog) => {
@@ -29,6 +29,9 @@ module.exports.getDog = (req, res, next) => {
     })
     .catch(next);
 };
+module.exports.getUserDogs = (req, res, next) => {
+  getDog(req.params.userId, req, res, next)
+}
 
 module.exports.deleteDog = (req, res, next) => {
   Dog.findByIdAndDelete(req.params.id)

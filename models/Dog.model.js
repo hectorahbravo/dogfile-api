@@ -25,6 +25,19 @@ const dogSchema = mongoose.Schema(
       default:
         "https://img.freepik.com/free-vector/flat-design-dachshund-silhouette-illustration_23-2150366733.jpg?w=740&t=st=1708372816~exp=1708373416~hmac=d153be183c4b21136d101fc5dd6a3176fefbce404f2bd3c0e2ff4d7c35100b82",
     },
+    foodType: {
+      type: String,
+    },
+    foodTimes: {
+      type: String
+    },
+    foodKg: {
+      type: String
+    },
+    temperament: {
+      type: String,
+      enum: ["Estable", "Miedoso", "Reactivo"]
+    },
     owner: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
