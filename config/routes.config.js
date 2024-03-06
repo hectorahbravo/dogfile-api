@@ -20,7 +20,7 @@ router.put("/users/:id", authMiddleware.isAuthenticated, usersController.editUse
 
 //Dogs
 router.post("/users/:userId/dogs", authMiddleware.isAuthenticated, dogsControllers.create);
-router.get("/users/:id/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.getDog);
+router.get("/users/:userId/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.getDog);
 router.delete("/users/:id/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.deleteDog);
 router.put("/users/:id/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.editDog);
 router.get('/users/:id/dogs/:dogId', authMiddleware.isAuthenticated, dogsControllers.getUserDogs)

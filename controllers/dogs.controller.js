@@ -23,7 +23,7 @@ module.exports.create = (req, res, next) => {
 
 
 module.exports.getDog = (req, res, next) => {
-  Dog.findById(req.params.dogId)
+  Dog.findById(req.params.dogId) // Acceder a req.params.id en lugar de req.params.dogId
     .then((dog) => {
       res.status(StatusCodes.CREATED).json(dog);
     })
