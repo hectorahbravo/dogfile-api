@@ -46,7 +46,7 @@ module.exports.deleteDog = (req, res, next) => {
 }
 
 module.exports.editDog = (req, res, next) => {
-  Dog.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Dog.findByIdAndUpdate(req.params.dogId, req.body, { new: true })
     .then(editedDog => {
       res.json(editedDog);
     })
