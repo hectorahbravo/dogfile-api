@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 
 const reminderSchema = mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: [true, "Required field"],
     },
     type: {
       type: [String],
-      enum: ["tipo1", "tipo1", "tipo2", "other"],
+      enum: ["tipo1", "tipo2", "tipo3", "other"],
       required: [true, "Required field"],
     },
     icon: {
@@ -25,16 +25,14 @@ const reminderSchema = mongoose.Schema(
     },
     frequency: {
       type: String,
-      enum: ["daily", "monthly", "annually", "range"],
+      enum: ["daily", "monthly", "annually", ""],
     },
-    startingDate: {
-      type: Date,
+    date: {
+      type: String,
     },
-    endingDate: {
-      type: Date,
-    },
+
     hour: {
-      type: Date,
+      type: String,
     },
   },
   {
