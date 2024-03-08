@@ -49,7 +49,7 @@ module.exports.deleteUser = (req, res, next) => {
 };
 
 module.exports.editUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  User.findByIdAndUpdate(req.params.userId, req.body, { new: true })
     .then((editedUser) => {
       res.json(editedUser);
     })

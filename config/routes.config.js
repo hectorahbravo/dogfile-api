@@ -16,7 +16,7 @@ router.post("/users", upload.single("avatar"), usersController.create);
 router.get("/users/me", authMiddleware.isAuthenticated, usersController.getCurrentUser);
 router.get("/users/:id", authMiddleware.isAuthenticated, usersController.getUser);
 router.delete("/users/:id", authMiddleware.isAuthenticated, usersController.deleteUser);
-router.put("/users/:id", authMiddleware.isAuthenticated, usersController.editUser);
+router.put("/users/:userId", authMiddleware.isAuthenticated, usersController.editUser);
 
 //Dogs
 router.post("/users/:userId/dogs", authMiddleware.isAuthenticated, dogsControllers.create);
