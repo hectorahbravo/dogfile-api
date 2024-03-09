@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const createError = require("http-errors");
 const User = require("../models/User.model");
-
+const { transporter, createEmailTemplate } = require('../config/nodemailer.config');
 module.exports.create = (req, res, next) => {
   const userToCreate = {
     ...req.body,
@@ -20,13 +20,21 @@ module.exports.create = (req, res, next) => {
           )
         );
       } else {
-        return User.create(userToCreate).then((userCreated) => {
-          res.status(StatusCodes.CREATED).json(userCreated);
-        });
+        return User.create(userToCreate)
       }
     })
+    .then((newUser) => {
+      transporter.sendMail({
+        from: process.env.NODEMAILER_EMAIL,
+        to: newUser.email,
+        subject: 'Account Activation',
+        html: createEmailTemplate(newUser),
+      });
+      res.status(201).json(newUser);
+      })
     .catch(next);
 };
+
 
 module.exports.getUser = (req, res, next) => {
   User.findById(req.params.id)
@@ -63,4 +71,13 @@ module.exports.getCurrentUser = (req, res, next) => {
       res.status(StatusCodes.CREATED).json(user);
     })
     .catch(next);
+};
+
+module.exports.activate = (req, res, next) => {
+  const { token } = req.params;
+  User.findOneAndUpdate({ activationToken: token }, { isActive: true }, { new: true })
+    .then((dbUser) => {
+      res.status(200).json({ message: "Account activated successfully", email: dbUser.email });
+    })
+    .catch((error) => next(error));
 };

@@ -34,7 +34,7 @@ module.exports.getUserDogs = (req, res, next) => {
 }
 
 module.exports.deleteDog = (req, res, next) => {
-  Dog.findByIdAndDelete(req.params.id)
+  Dog.findByIdAndDelete(req.params.dogId)
     .then((dog) => {
       if (!dog) {
         next(createError(StatusCodes.NOT_FOUND, 'Dog not found'))

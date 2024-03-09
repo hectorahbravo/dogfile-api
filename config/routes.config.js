@@ -17,11 +17,12 @@ router.get("/users/me", authMiddleware.isAuthenticated, usersController.getCurre
 router.get("/users/:id", authMiddleware.isAuthenticated, usersController.getUser);
 router.delete("/users/:id", authMiddleware.isAuthenticated, usersController.deleteUser);
 router.put("/users/:userId", authMiddleware.isAuthenticated, usersController.editUser);
+router.get("/activate/:token", usersController.activate)
 
 //Dogs
 router.post("/users/:userId/dogs", authMiddleware.isAuthenticated, dogsControllers.create);
 router.get("/users/:userId/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.getDog);
-router.delete("/users/:id/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.deleteDog);
+router.delete("/users/:userId/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.deleteDog);
 router.put("/users/:userId/dogs/:dogId", authMiddleware.isAuthenticated, dogsControllers.editDog);
 router.get('/users/:id/dogs/:dogId', authMiddleware.isAuthenticated, dogsControllers.getUserDogs)
 
