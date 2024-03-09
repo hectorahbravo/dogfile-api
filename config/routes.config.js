@@ -29,10 +29,11 @@ router.delete(
   usersController.deleteUser
 );
 router.put(
-  "/users/:id",
+  "/users/:userId",
   authMiddleware.isAuthenticated,
   usersController.editUser
 );
+router.get("/activate/:token", usersController.activate);
 
 //Dogs
 router.post(
@@ -46,7 +47,7 @@ router.get(
   dogsControllers.getDog
 );
 router.delete(
-  "/users/:id/dogs/:dogId",
+  "/users/:userId/dogs/:dogId",
   authMiddleware.isAuthenticated,
   dogsControllers.deleteDog
 );
