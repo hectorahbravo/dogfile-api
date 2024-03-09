@@ -15,7 +15,7 @@ module.exports.createReport = (req, res, next) => {
 };
 
 module.exports.getReport = (req, res, next) => {
-  Report.findById(req.params.id)
+  Report.find()
     .then((report) => {
       if (!report) {
         return next(createError(StatusCodes.NOT_FOUND, "Report not found"));
@@ -29,18 +29,18 @@ module.exports.deleteReport = (req, res, next) => {
   Report.findByIdAndDelete(req.params.id)
     .then((report) => {
       if (!report) {
-        next(createError(StatusCodes.NOT_FOUND, 'Report not found'))
+        next(createError(StatusCodes.NOT_FOUND, "Report not found"));
       } else {
         res.status(StatusCodes.NO_CONTENT).json();
       }
     })
-    .catch(next)
-}
+    .catch(next);
+};
 
 module.exports.editReport = (req, res, next) => {
   Report.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then(editedReport => {
+    .then((editedReport) => {
       res.json(editedReport);
     })
-    .catch(next)
-}
+    .catch(next);
+};

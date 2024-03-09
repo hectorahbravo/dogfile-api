@@ -46,12 +46,31 @@ const userSchema = mongoose.Schema(
 );
 // Crear el metodo para comparar contraseñas
 
-userSchema.virtual('dogs', {
-  ref: 'Dog',
-  foreignField: 'owner',
-  localField: '_id',
-  justOne: false
-})
+userSchema.virtual("dogs", {
+  ref: "Dog",
+  foreignField: "owner",
+  localField: "_id",
+  justOne: false,
+});
+
+userSchema.virtual("reminders", {
+  ref: "Reminder",
+  foreignField: "user",
+  localField: "_id",
+  justOne: false,
+});
+userSchema.virtual("reports", {
+  ref: "Report",
+  foreignField: "user",
+  localField: "_id",
+  justOne: false,
+});
+userSchema.virtual("recommendations", {
+  ref: "recommendation",
+  foreignField: "user",
+  localField: "_id",
+  justOne: false,
+});
 
 userSchema.methods.checkPassword = function (passwordToCompare) {
   return bcrypt.compare(passwordToCompare, this.password);

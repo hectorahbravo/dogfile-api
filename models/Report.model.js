@@ -34,6 +34,11 @@ const reportSchema = mongoose.Schema(
       type: Number,
       required: [true, "La longitud es obligatoria"],
     },
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+      required: [true, "Required field"],
+    },
   },
   {
     timestamps: true,

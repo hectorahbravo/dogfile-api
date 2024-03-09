@@ -27,12 +27,20 @@ const reminderSchema = mongoose.Schema(
       type: String,
       enum: ["daily", "monthly", "annually", ""],
     },
-    date: {
+    startDate: {
+      type: String,
+    },
+    endDate: {
       type: String,
     },
 
     hour: {
       type: String,
+    },
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+      required: [true, "Required field"],
     },
   },
   {

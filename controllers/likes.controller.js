@@ -11,7 +11,7 @@ module.exports.toggleLike = (req, res, next) => {
   // Determinar el tipo de objetivo y el campo correspondiente en el esquema de Like
   if (path.includes("reports")) {
     targetField = "report";
-  } else if (path.includes("recomendations")) {
+  } else if (path.includes("recommendations")) {
     targetField = "recommendation";
   } else {
     return res.status(StatusCodes.NOT_FOUND).json({ error: "Invalid path" });

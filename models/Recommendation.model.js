@@ -23,9 +23,15 @@ const recommendationSchema = mongoose.Schema(
       required: [true, "La longitud es obligatoria"],
     },
     image: {
-        type: String,
-        default: "https://images.freeimages.com/image/previews/c2f/nature-tree-flat-vector-png-5690469.png",
-    }
+      type: String,
+      default:
+        "https://images.freeimages.com/image/previews/c2f/nature-tree-flat-vector-png-5690469.png",
+    },
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+      required: [true, "Required field"],
+    },
   },
   {
     timestamps: true,
