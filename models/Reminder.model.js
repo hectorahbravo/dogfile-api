@@ -8,12 +8,23 @@ const reminderSchema = mongoose.Schema(
     },
     type: {
       type: [String],
-      enum: ["tipo1", "tipo2", "tipo3", "other"],
+      enum: [
+        "Medicamentos",
+        "Vacuna",
+        "Visita al veterinario",
+        "Pastillas antiparacitarias",
+        "Pipeta antiparacitaria",
+        "Collar antiparacitario",
+        "Baño",
+        "Peluqueria",
+        "Vacuna polivalente rabia",
+        "Otros",
+      ],
       required: [true, "Required field"],
     },
     icon: {
       type: String,
-      enum: ["icon1", "icon2", "icon3", "icon4"],
+      enum: ["", "icon2", "icon3", "icon4"],
       required: [true, "Required field"],
     },
     photo: {
@@ -25,7 +36,7 @@ const reminderSchema = mongoose.Schema(
     },
     frequency: {
       type: String,
-      enum: ["daily", "monthly", "annually", ""],
+      enum: ["daily", "monthly", "weekly", "annually", ""],
     },
     startDate: {
       type: String,

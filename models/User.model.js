@@ -44,6 +44,9 @@ const userSchema = mongoose.Schema(
       default:
         "https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?w=740&t=st=1708372445~exp=1708373045~hmac=33d3a3c8a115dda681ea42275ad3fe94ddad18dcb8ca4a63bf0bcae88618e162",
     },
+    selectedProfile: {
+      type: String,
+    },
   },
   {
     timestamps: true,

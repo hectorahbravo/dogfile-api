@@ -44,3 +44,43 @@ module.exports.editReminder = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.getRemindersDay = (req, res, next) => {
+  const { userId } = req.body;
+  const date = new Date(req.params.date);
+
+  Reminder.find({ user: userId })
+    .then((reminders) => {
+      const remindersForDay = reminders.filter((reminder) => {
+        const reminderStartDate = new Date(reminder.startDate);
+        const reminderEndDate = new Date(reminder.endDate);
+
+        if (!reminder.repeat) {
+          return reminderStartDate <= date && reminderEndDate >= date;
+        }
+
+        switch (reminder.repeatType) {
+          case "daily":
+            return true;
+          case "weekly":
+            return (
+              reminderStartDate <= date &&
+              reminderEndDate >= date &&
+              date.getDay() === reminderStartDate.getDay()
+            );
+          case "monthly":
+            return reminderStartDate.getDate() === date.getDate();
+          case "annually":
+            return (
+              reminderStartDate.getMonth() === date.getMonth() &&
+              reminderStartDate.getDate() === date.getDate()
+            );
+          default:
+            return false;
+        }
+      });
+      console.log(remindersForDayç);
+      res.json(remindersForDay);
+    })
+    .catch((err) => next(err));
+};

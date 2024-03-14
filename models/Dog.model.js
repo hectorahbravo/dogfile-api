@@ -14,7 +14,7 @@ const dogSchema = mongoose.Schema(
       required: [true, "Required field"],
     },
     vaccines: {
-      type: String,
+      type: [String],
       enum: ["vaccine1", "vaccine2", "vaccine3"],
     },
     allergies: {
@@ -29,14 +29,14 @@ const dogSchema = mongoose.Schema(
       type: String,
     },
     foodTimes: {
-      type: String
+      type: String,
     },
     foodKg: {
-      type: String
+      type: String,
     },
     temperament: {
       type: String,
-      enum: ["Estable", "Miedoso", "Reactivo"]
+      enum: ["Estable", "Miedoso", "Reactivo"],
     },
     owner: {
       type: mongoose.SchemaTypes.ObjectId,

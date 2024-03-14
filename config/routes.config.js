@@ -95,6 +95,12 @@ router.get(
   authMiddleware.isAuthenticated,
   remindersController.getReminder
 );
+
+router.get(
+  "/reminders/day/:date",
+  authMiddleware.isAuthenticated,
+  remindersController.getRemindersDay
+);
 router.delete("/reminders/:id", remindersController.deleteReminder);
 router.put("/reminders/:id", remindersController.editReminder);
 module.exports = router;
