@@ -13,10 +13,10 @@ const dogSchema = mongoose.Schema(
       type: String,
       required: [true, "Required field"],
     },
-    vaccines: {
+    vaccines: [{
       type: String,
       enum: ["vaccine1", "vaccine2", "vaccine3"],
-    },
+    }],
     allergies: {
       type: String,
     },
