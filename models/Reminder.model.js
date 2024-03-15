@@ -24,7 +24,6 @@ const reminderSchema = mongoose.Schema(
     },
     icon: {
       type: String,
-      enum: ["", "icon2", "icon3", "icon4"],
       required: [true, "Required field"],
     },
     photo: {
@@ -36,7 +35,7 @@ const reminderSchema = mongoose.Schema(
     },
     frequency: {
       type: String,
-      enum: ["daily", "monthly", "weekly", "annually", ""],
+      enum: ["daily", "monthly", "weekly", "annually", "", "none"],
     },
     startDate: {
       type: String,

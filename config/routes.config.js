@@ -70,7 +70,7 @@ router.put("/reports/:id", reportsController.editReport);
 
 //Recommendations
 router.post("/recommendations", recommendationsController.createRecommendation);
-router.get("/recommendations/:id", recommendationsController.getRecommendation);
+router.get("/recommendations", recommendationsController.getRecommendations);
 router.put(
   "/recommendations/:id",
   recommendationsController.editRecommendation

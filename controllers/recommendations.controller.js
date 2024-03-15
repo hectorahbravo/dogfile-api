@@ -14,8 +14,8 @@ module.exports.createRecommendation = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getRecommendation = (req, res, next) => {
-  Recommendation.findById(req.params.id)
+module.exports.getRecommendations = (req, res, next) => {
+  Recommendation.find()
     .then((recommendation) => {
       if (!recommendation) {
         return next(

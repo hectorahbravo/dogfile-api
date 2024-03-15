@@ -39,6 +39,10 @@ const reportSchema = mongoose.Schema(
       ref: "User",
       required: [true, "Required field"],
     },
+    type: {
+      type: String,
+      default: "report",
+    },
   },
   {
     timestamps: true,
