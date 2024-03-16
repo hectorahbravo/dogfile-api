@@ -13,10 +13,10 @@ module.exports.transporter = nodemailer.createTransport({
 module.exports.createEmailTemplate = (user) => {
   return `
     <div style="margin: 24px;">
-      <h1>Valida tu email</h1>
-      <p>Hola ${user.username} 👋🏻, ¡Gracias por registrarte en <strong>planesmadrid</strong>!</p>
+      <h1>Verifica tu cuenta</h1>
+      <p>Hola ${user.username} 👋🏻, ¡Gracias por registrarte en <strong>DogFile</strong>!</p>
       <p>Haz clic aquí para verificar tu email</p>
-      <a href="http://localhost:5173/activate/${user.activationToken}" style="background-color: green;color: whitesmoke;padding: 8px 12px;border-radius: 4px;text-decoration: none;">
+      <a href="http://localhost:5173/activate/${user.activationToken}" style="background-color: brown;color: whitesmoke;padding: 8px 12px;border-radius: 4px;text-decoration: none;">
         Activar cuenta
       </a>
     </div>
