@@ -13,7 +13,15 @@ const dogSchema = mongoose.Schema(
       type: String,
       required: [true, "Required field"],
     },
-
+    description: {
+      type: String,
+      required: [true, "Required field"],
+    },
+    sex: {
+      type: String,
+      enum: ["Macho", "Hembra"],
+      required: [true, "Required field"],
+    },
     vaccines: {
       type: [String],
       required: [true, "Required field"],
