@@ -1,10 +1,14 @@
 const { StatusCodes } = require("http-status-codes");
 const createError = require("http-errors");
 const User = require("../models/User.model");
+const Vet = require("../models/Vet.model");
+
+
 const {
   transporter,
   createEmailTemplate,
 } = require("../config/nodemailer.config");
+
 module.exports.create = (req, res, next) => {
   const userToCreate = {
     ...req.body,
@@ -57,8 +61,17 @@ module.exports.deleteUser = (req, res, next) => {
 };
 
 module.exports.editUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.userId, req.body, { new: true })
+  const updateFields = { ...req.body };
+
+  // Verifica si hay un archivo de avatar adjunto en la solicitud
+  if (req.file) {
+    updateFields.avatar = req.file.path; // Asigna el path del archivo al campo de avatar
+  }
+  console.log('Update fields before update:', updateFields); // Agrega este console.log para imprimir los campos de actualización antes de la actualización
+
+  User.findByIdAndUpdate(req.params.userId, updateFields, { new: true })
     .then((editedUser) => {
+      console.log('Edited user:', editedUser); // Agrega este console.log para imprimir el usuario editado después de la actualización
       res.json(editedUser);
     })
     .catch(next);
@@ -90,4 +103,14 @@ module.exports.activate = (req, res, next) => {
         });
     })
     .catch((error) => next(error));
+};
+
+module.exports.getAllVets = (req, res, next) => {
+  Vet.find()
+    .then((vets) => {
+      res.status(200).json(vets);
+    })
+    .catch((error) => {
+      next(error);
+    });
 };

@@ -79,7 +79,7 @@ module.exports.getRemindersDay = (req, res, next) => {
             return false;
         }
       });
-      console.log(remindersForDayç);
+      console.log(remindersForDay);
       res.json(remindersForDay);
     })
     .catch((err) => next(err));

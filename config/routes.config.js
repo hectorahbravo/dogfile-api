@@ -8,8 +8,11 @@ const likeController = require("../controllers/likes.controller");
 const authController = require("../controllers/auth.controller");
 const remindersController = require("../controllers/reminders.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
+const vetController = require("../controllers/vet.controller");
+const vetremindersController = require ("../controllers/vetreminders.controller")
 //Auth
 router.post("/login", authController.login);
+router.post("/login/vets", authController.loginVet);
 
 //User
 router.post("/users", upload.single("avatar"), usersController.create);
@@ -34,6 +37,42 @@ router.put(
   usersController.editUser
 );
 router.get("/activate/:token", usersController.activate);
+
+//Vet
+router.post("/register/vets", upload.single("avatar"), vetController.create);
+router.get(
+  "/vets/me",
+  authMiddleware.isAuthenticated,
+  vetController.getCurrentVet
+);
+
+router.get('/vets/:vetId/dogs', vetController.getDogsAssociatedWithVet);
+
+
+router.get(
+  "/allvets",
+  authMiddleware.isAuthenticated,
+  vetController.getAllVets
+);
+router.get(
+  "/vets/:id",
+  authMiddleware.isAuthenticated,
+  vetController.getVet
+);
+router.delete(
+  "/vets/:id",
+  authMiddleware.isAuthenticated,
+  vetController.deleteVet
+);
+router.put(
+  "/vets/:vetId",
+  authMiddleware.isAuthenticated,
+  vetController.editVet
+);
+router.get("/activatevet/:token", vetController.activateVet);
+router.get('/:vetId/users', vetController.getUsersAssociatedWithVet);
+
+
 
 //Dogs
 router.post(
@@ -103,4 +142,27 @@ router.get(
 );
 router.delete("/reminders/:id", remindersController.deleteReminder);
 router.put("/reminders/:id", remindersController.editReminder);
+
+
+//VetReminders
+router.post(
+  "/vetreminders",
+  authMiddleware.isAuthenticated,
+  vetremindersController.createVetReminder
+);
+router.get(
+  "/vetreminders",
+  authMiddleware.isAuthenticated,
+  vetremindersController.getVetReminder
+);
+
+router.get(
+  "/vetreminders/day/:date",
+  authMiddleware.isAuthenticated,
+  vetremindersController.getVetRemindersDay
+);
+router.delete("/vetreminders/:id", vetremindersController.deleteVetReminder);
+router.put("/vetreminders/:id", vetremindersController.editVetReminder);
+
+
 module.exports = router;

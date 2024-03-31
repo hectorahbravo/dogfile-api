@@ -16,7 +16,21 @@ module.exports.createEmailTemplate = (user) => {
       <h1>Verifica tu cuenta</h1>
       <p>Hola ${user.username} 👋🏻, ¡Gracias por registrarte en <strong>DogFile</strong>!</p>
       <p>Haz clic aquí para verificar tu email</p>
-      <a href="https://dogfile.netlify.app/activate/${user.activationToken}" style="background-color: green;color: whitesmoke;padding: 8px 12px;border-radius: 4px;text-decoration: none;">
+      <a href="http://localhost:5173/activate/${user.activationToken}" style="background-color: green;color: whitesmoke;padding: 8px 12px;border-radius: 4px;text-decoration: none;">
+        Activar cuenta
+      </a>
+    </div>
+  `;
+};
+
+
+module.exports.createEmailTemplateVet = (vet) => {
+  return `
+    <div style="margin: 24px;">
+      <h1>Verifica tu cuenta</h1>
+      <p>Hola ${vet.name} 👋🏻, ¡Gracias por registrarte en <strong>DogFile</strong>!</p>
+      <p>Haz clic aquí para verificar tu email</p>
+      <a href="http://localhost:5173/activatevet/${vet.activationToken}" style="background-color: green;color: whitesmoke;padding: 8px 12px;border-radius: 4px;text-decoration: none;">
         Activar cuenta
       </a>
     </div>

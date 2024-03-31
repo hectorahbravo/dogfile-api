@@ -5,9 +5,9 @@ const ROUNDS = 10;
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-const userSchema = mongoose.Schema(
+const vetSchema = mongoose.Schema(
   {
-    username: {
+    name: {
       type: String,
       unique: true,
       required: [true, "Required field"],
@@ -26,6 +26,7 @@ const userSchema = mongoose.Schema(
       required: [true, "required field"],
       minlength: [8, "invalid length"],
     },
+
     activationToken: {
       type: String,
       default: () => {
@@ -40,17 +41,10 @@ const userSchema = mongoose.Schema(
       default: false,
     },
     avatar: {
-      type: String,
-      default:
-        "https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?w=740&t=st=1708372445~exp=1708373045~hmac=33d3a3c8a115dda681ea42275ad3fe94ddad18dcb8ca4a63bf0bcae88618e162",
-    },
-    selectedProfile: {
-      type: String,
-    },
-    selectedVet: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Vet",
-    },
+        type: String,
+        default:
+          "https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?w=740&t=st=1708372445~exp=1708373045~hmac=33d3a3c8a115dda681ea42275ad3fe94ddad18dcb8ca4a63bf0bcae88618e162",
+      },
   },
   {
     timestamps: true,
@@ -65,40 +59,19 @@ const userSchema = mongoose.Schema(
   }
 );
 // Crear el metodo para comparar contraseñas
-
-userSchema.virtual("dogs", {
-  ref: "Dog",
-  foreignField: "owner",
+vetSchema.virtual("users", {
+  ref: "User",
+  foreignField: "selectedVet",
   localField: "_id",
   justOne: false,
 });
-
-userSchema.virtual("reminders", {
-  ref: "Reminder",
-  foreignField: "user",
-  localField: "_id",
-  justOne: false,
-});
-userSchema.virtual("reports", {
-  ref: "Report",
-  foreignField: "user",
-  localField: "_id",
-  justOne: false,
-});
-userSchema.virtual("recommendations", {
-  ref: "recommendation",
-  foreignField: "user",
-  localField: "_id",
-  justOne: false,
-});
-
-userSchema.methods.checkPassword = function (passwordToCompare) {
+vetSchema.methods.checkPassword = function (passwordToCompare) {
   return bcrypt.compare(passwordToCompare, this.password);
 };
 
 // Presave para guardar la contraseña hasheada
 
-userSchema.pre("save", function (next) {
+vetSchema.pre("save", function (next) {
   if (this.isModified("password")) {
     bcrypt
       .hash(this.password, ROUNDS)
@@ -113,5 +86,7 @@ userSchema.pre("save", function (next) {
   }
 });
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+
+
+const Vet = mongoose.model("Vet", vetSchema);
+module.exports = Vet;
