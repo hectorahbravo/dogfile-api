@@ -47,10 +47,6 @@ const userSchema = mongoose.Schema(
     selectedProfile: {
       type: String,
     },
-    selectedVet: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Vet",
-    },
   },
   {
     timestamps: true,

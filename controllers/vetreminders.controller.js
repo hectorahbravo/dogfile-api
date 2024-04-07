@@ -4,14 +4,12 @@ const VetReminder = require("../models/VetReminder.model");
 const User = require("../models/User.model");
 
 module.exports.createVetReminder = (req, res, next) => {
-  const { userId, vetId, ...reminderData } = req.body;
-
-  // Agregar el ID del usuario y del veterinario al recordatorio
-  reminderData.user = userId;
-  reminderData.vet = vetId;
+  const vetReminderToCreate = {
+    ...req.body,
+  };
 
   // Crear el recordatorio
-  VetReminder.create(reminderData)
+  VetReminder.create(vetReminderToCreate)
     .then(vetReminder => {
       res.status(StatusCodes.CREATED).json(vetReminder);
     })
