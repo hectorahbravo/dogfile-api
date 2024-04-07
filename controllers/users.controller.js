@@ -3,7 +3,6 @@ const createError = require("http-errors");
 const User = require("../models/User.model");
 const Vet = require("../models/Vet.model");
 
-
 const {
   transporter,
   createEmailTemplate,
@@ -11,8 +10,7 @@ const {
 
 module.exports.create = (req, res, next) => {
   const userToCreate = {
-    ...req.body,
-    avatar: req.file.path,
+    ...req.body
   };
 
   User.findOne({ email: req.body.email })
@@ -67,11 +65,11 @@ module.exports.editUser = (req, res, next) => {
   if (req.file) {
     updateFields.avatar = req.file.path; // Asigna el path del archivo al campo de avatar
   }
-  console.log('Update fields before update:', updateFields); // Agrega este console.log para imprimir los campos de actualización antes de la actualización
+  console.log("Update fields before update:", updateFields); // Agrega este console.log para imprimir los campos de actualización antes de la actualización
 
   User.findByIdAndUpdate(req.params.userId, updateFields, { new: true })
     .then((editedUser) => {
-      console.log('Edited user:', editedUser); // Agrega este console.log para imprimir el usuario editado después de la actualización
+      console.log("Edited user:", editedUser); // Agrega este console.log para imprimir el usuario editado después de la actualización
       res.json(editedUser);
     })
     .catch(next);
@@ -95,12 +93,10 @@ module.exports.activate = (req, res, next) => {
     { new: true }
   )
     .then((dbUser) => {
-      res
-        .status(200)
-        .json({
-          message: "Account activated successfully",
-          email: dbUser.email,
-        });
+      res.status(200).json({
+        message: "Account activated successfully",
+        email: dbUser.email,
+      });
     })
     .catch((error) => next(error));
 };
