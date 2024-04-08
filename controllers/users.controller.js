@@ -10,7 +10,7 @@ const {
 
 module.exports.create = (req, res, next) => {
   const userToCreate = {
-    ...req.body
+    ...req.body,
   };
 
   User.findOne({ email: req.body.email })
@@ -61,15 +61,14 @@ module.exports.deleteUser = (req, res, next) => {
 module.exports.editUser = (req, res, next) => {
   const updateFields = { ...req.body };
 
-  // Verifica si hay un archivo de avatar adjunto en la solicitud
   if (req.file) {
-    updateFields.avatar = req.file.path; // Asigna el path del archivo al campo de avatar
+    updateFields.avatar = req.file.path;
   }
-  console.log("Update fields before update:", updateFields); // Agrega este console.log para imprimir los campos de actualización antes de la actualización
+  console.log("Update fields before update:", updateFields);
 
   User.findByIdAndUpdate(req.params.userId, updateFields, { new: true })
     .then((editedUser) => {
-      console.log("Edited user:", editedUser); // Agrega este console.log para imprimir el usuario editado después de la actualización
+      console.log("Edited user:", editedUser);
       res.json(editedUser);
     })
     .catch(next);
