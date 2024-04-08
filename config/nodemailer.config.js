@@ -376,7 +376,7 @@ module.exports.createEmailTemplate = (user) => {
               </tr>
           </table>
           <![endif]-->
-                                 <!--[if !mso]><! --><a style="display: inline-block; border-radius: 8px; background-color: #d7864f; padding: 15px 17px 15px 17px; font-family: Fira Sans, Arial, Helvetica, sans-serif; font-weight: 500; font-size: 16px; line-height: 150%; letter-spacing: -0.2px; color: #ffffff; vertical-align: top; text-align: center; text-align-last: center; text-decoration: none; -webkit-text-size-adjust: none;" href="http://localhost:5173/activate/${user.activationToken}" target="_blank">Verificar</a>
+                                 <!--[if !mso]><! --><a style="display: inline-block; border-radius: 8px; background-color: #d7864f; padding: 15px 17px 15px 17px; font-family: Fira Sans, Arial, Helvetica, sans-serif; font-weight: 500; font-size: 16px; line-height: 150%; letter-spacing: -0.2px; color: #ffffff; vertical-align: top; text-align: center; text-align-last: center; text-decoration: none; -webkit-text-size-adjust: none;" href="https://dogfile.netlify.app/activate/${user.activationToken}" target="_blank">Verificar</a>
                                  <!--<![endif]-->
                                 </th>
                                </tr>
