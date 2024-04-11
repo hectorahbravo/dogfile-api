@@ -16,6 +16,7 @@ module.exports.createReport = (req, res, next) => {
 
 module.exports.getReport = (req, res, next) => {
   Report.find()
+    .populate("user")
     .then((report) => {
       if (!report) {
         return next(createError(StatusCodes.NOT_FOUND, "Report not found"));

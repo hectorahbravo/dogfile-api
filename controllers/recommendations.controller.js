@@ -16,6 +16,7 @@ module.exports.createRecommendation = (req, res, next) => {
 
 module.exports.getRecommendations = (req, res, next) => {
   Recommendation.find()
+    .populate("user")
     .then((recommendation) => {
       if (!recommendation) {
         return next(
